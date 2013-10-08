@@ -1,5 +1,5 @@
 name: idobata-notify
-version: 0.0.1
+version: 0.0.2
 description: Send build or deploy notification to idobata
 keywords:
   - notification
