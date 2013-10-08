@@ -43,4 +43,4 @@ else
 fi
 info "$message"
 
-$cmd -d body="$message" https://idobata.io/hook/"$WERCKER_IDOBATA_NOTIFY_TOKEN" -o '' 2>/dev/null
+$cmd -X POST --data-urlencode "body=$message" "https://idobata.io/hook/$WERCKER_IDOBATA_NOTIFY_TOKEN"
