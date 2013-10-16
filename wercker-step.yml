@@ -1,5 +1,5 @@
 name: idobata-notify
-version: 0.0.2
+version: 0.0.3
 description: Send build or deploy notification to idobata
 keywords:
   - notification
@@ -15,4 +15,4 @@ properties:
     required: false
   on:
     type: string
-    required: false
+    default: always

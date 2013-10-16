@@ -12,7 +12,7 @@
 ```
 deploy:
   after-steps:
-    - 1syo/idobata-notify@0.0.2:
+    - 1syo/idobata-notify@0.0.3:
         token: YOUR_IDOBATA_TOKEN
 ```
 
