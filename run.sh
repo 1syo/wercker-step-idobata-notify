@@ -37,10 +37,10 @@ else
 fi
 
 if [ "$WERCKER_RESULT" = "passed" ]; then
-  message="$passed_message"
+  message="<p style=\"color:green\">$passed_message</p>"
 else
-  message="$failed_message"
+  message="<p style=\"color:red\">$failed_message</p>"
 fi
 info "$message"
 
-$cmd -X POST -s --data-urlencode "body=$message" "https://idobata.io/hook/$WERCKER_IDOBATA_NOTIFY_TOKEN" > /dev/null
+$cmd -s --data-urlencode "source=$message" -d format=html "https://idobata.io/hook/$WERCKER_IDOBATA_NOTIFY_TOKEN" > /dev/null
