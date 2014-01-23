@@ -1,46 +1,37 @@
-#!/bin/sh
-
-cmd=`which curl`
-if [ ! -n "$cmd" ]; then
-  fail 'Command not found.'
-fi
-
 if [ ! -n "$WERCKER_IDOBATA_NOTIFY_TOKEN" ]; then
   fail 'Please specify token property.'
 fi
 
 if [ "$WERCKER_IDOBATA_NOTIFY_ON" = "failed" ]; then
-  if [ "$WERCKER_RESULT" = "passed" ]; then
-    info "Skipping..."
-    return 0
-  fi
-fi
-
-if [ ! -n "$WERCKER_IDOBATA_NOTIFY_PASSED_MESSAGE" ]; then
-  if [ ! -n "$DEPLOY" ]; then
-    passed_message="$WERCKER_APPLICATION_OWNER_NAME/$WERCKER_APPLICATION_NAME: build of $WERCKER_GIT_BRANCH by $WERCKER_STARTED_BY passed."
-  else
-    passed_message="$WERCKER_APPLICATION_OWNER_NAME/$WERCKER_APPLICATION_NAME: deploy to $WERCKER_DEPLOYTARGET_NAME by $WERCKER_STARTED_BY passed."
-  fi
-else
-  passed_message="$WERCKER_IDOBATA_NOTIFY_PASSED_MESSAGE"
-fi
-
-if [ ! -n "$WERCKER_IDOBATA_NOTIFY_FAILED_MESSAGE" ]; then
-  if [ ! -n "$DEPLOY" ]; then
-    failed_message="$WERCKER_APPLICATION_OWNER_NAME/$WERCKER_APPLICATION_NAME: build of $WERCKER_GIT_BRANCH by $WERCKER_STARTED_BY failed."
-  else
-    failed_message="$WERCKER_APPLICATION_OWNER_NAME/$WERCKER_APPLICATION_NAME: deploy to $WERCKER_DEPLOYTARGET_NAME by $WERCKER_STARTED_BY failed."
-  fi
-else
-  failed_message="$WERCKER_IDOBATA_NOTIFY_FAILED_MESSAGE"
+  info "Skipping..."
+  return 0
 fi
 
 if [ "$WERCKER_RESULT" = "passed" ]; then
-  message="<p style=\"color:green\">$passed_message</p>"
+  status="<span class=\"label label-success\">SUCCESS</span>"
 else
-  message="<p style=\"color:red\">$failed_message</p>"
+  status="<span class=\"label label-important\">FAILURE</span>"
 fi
-info "$message"
 
-$cmd -s --data-urlencode "source=$message" -d format=html "https://idobata.io/hook/$WERCKER_IDOBATA_NOTIFY_TOKEN" > /dev/null
+if [ "$CI" = "true" ]; then
+  step="build"
+  id=$WERCKER_BUILD_ID
+  url=$WERCKER_BUILD_URL
+elif [ "$DEPLOY" = "true" ]; then
+  step="deploy"
+  id=$WERCKER_DEPLOY_ID
+  url=$WERCKER_DEPLOY_URL
+else
+  step="build"
+  id=$WERCKER_BUILD_ID
+  url=$WERCKER_BUILD_URL
+fi
+
+info "step: $step"
+info "id: $id"
+info "url: $url"
+
+curl -s \
+  --data-urlencode "source=Project $WERCKER_APPLICATION_NAME $step $number, $url: $status" \
+  --data "format=html" \
+  "https://idobata.io/hook/$WERCKER_IDOBATA_NOTIFY_TOKEN"
