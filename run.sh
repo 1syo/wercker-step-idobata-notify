@@ -31,7 +31,16 @@ info "step: $step"
 info "id: $id"
 info "url: $url"
 
-curl -s \
+result=`curl -s \
   --data-urlencode "source=Project $WERCKER_APPLICATION_NAME $step $number, $url: $status" \
   --data "format=html" \
-  "https://idobata.io/hook/$WERCKER_IDOBATA_NOTIFY_TOKEN"
+  "https://idobata.io/hook/$WERCKER_IDOBATA_NOTIFY_TOKEN" \
+  --output "$WERCKER_STEP_TEMP/result.txt" \
+  --write-out "%{http_code}"`
+
+if [ "$result" = "200" ]; then
+  success "Finished successfully!"
+else
+  echo -e "`cat $WERCKER_STEP_TEMP/result.txt`"
+  fail "Finished Unsuccessfully."
+fi
