@@ -32,7 +32,7 @@ info "id: $id"
 info "url: $url"
 
 result=`curl -s \
-  --data-urlencode "source=Project $WERCKER_APPLICATION_NAME $step $number, $url: $status" \
+  --data-urlencode "source=Project $WERCKER_APPLICATION_NAME $step $id, $url: $status" \
   --data "format=html" \
   "https://idobata.io/hook/$WERCKER_IDOBATA_NOTIFY_TOKEN" \
   --output "$WERCKER_STEP_TEMP/result.txt" \
