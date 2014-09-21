@@ -1,0 +1,15 @@
+box: wercker/default
+build:
+  steps:
+    - script:
+        name: install bsts
+        code: |
+          sudo add-apt-repository ppa:duggan/bats --yes
+          sudo apt-get update -qq
+          sudo apt-get install -qq bats
+    - script:
+        name: test
+        code: bats test
+  after-steps:
+    - 1syo/idobata-notify@0.1.2:
+        token: $IDOBATA_TOKEN
