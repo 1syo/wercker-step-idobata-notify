@@ -1,16 +1,16 @@
 export PATH="$BATS_TEST_DIRNAME/..:$PATH"
 
 if [ ! -n "$WERCKER" ]; then
-    export WERCKER_APPLICATION_ID="5253e1053673929130009361"
-    export WERCKER_APPLICATION_NAME="wercker-step-idobata-notify"
-    export WERCKER_APPLICATION_OWNER_NAME="1syo"
-    export WERCKER_APPLICATION_URL="https://app.wercker.com/#applications/5253e1053673929130009361"
     export WERCKER_GIT_DOMAIN="github.com"
     export WERCKER_GIT_OWNER="1syo"
     export WERCKER_GIT_REPOSITORY="wercker-step-idobata-notify"
     export WERCKER_GIT_BRANCH="master"
-    export WERCKER_GIT_COMMIT="0202384f181758213525b55e077c4079276f3f70"
-    export WERCKER_STARTED_BY="1syo"
+    export WERCKER_GIT_COMMIT="aff2f780d59346c0386d59db6aac62e02be2005a"
+    export WERCKER_STARTED_BY="TAKAHASHI Kazunari"
+    export WERCKER_APPLICATION_ID="5253e1053673929130009361"
+    export WERCKER_APPLICATION_NAME="wercker-step-idobata-notify"
+    export WERCKER_APPLICATION_OWNER_NAME="1syo"
+    export WERCKER_APPLICATION_URL="https://app.wercker.com/#applications/5253e1053673929130009361"
     export WERCKER_STEP_TEMP=$BATS_TMPDIR
 fi
 
