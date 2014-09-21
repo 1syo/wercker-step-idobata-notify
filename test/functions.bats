@@ -4,7 +4,13 @@ load test_helper
 source "$BATS_TEST_DIRNAME/../functions.sh"
 
 setup() {
-    suffix="(${WERCKER_GIT_COMMIT:0:7}) of $WERCKER_GIT_OWNER/$WERCKER_GIT_REPOSITORY@$WERCKER_GIT_BRANCH by $WERCKER_STARTED_BY"
+    repository="$WERCKER_GIT_OWNER/$WERCKER_GIT_REPOSITORY"
+    branch="($WERCKER_GIT_BRANCH - ${WERCKER_GIT_COMMIT:0:7})"
+    stub git "TAKAHASHI Kazunari: commit message here"
+}
+
+teardown() {
+    unstub git
 }
 
 @test "Token undefined" {
@@ -25,8 +31,7 @@ setup() {
 }
 
 @test "Build Passed" {
-    source="Build <span class=\"label label-success\">passed</span> \
-<a href=\"http://example.com/build/1\">#1</a> $suffix"
+    source="Build $repository<a href=\"http://example.com/build/1\">#1</a> $branch: <span class=\"label label-success\">PASSED</span><br />TAKAHASHI Kazunari: commit message here"
 
     WERCKER_IDOBATA_NOTIFY_TOKEN=token \
     WERCKER_BUILD_URL="http://example.com/build/1" \
@@ -40,8 +45,7 @@ setup() {
 }
 
 @test "Deploy passed" {
-    source="Deploy to sandbox <span class=\"label label-success\">passed</span> \
-<a href=\"http://example.com/deploy/1\">#1</a> ${suffix}"
+    source="Deploy $repository<a href=\"http://example.com/deploy/1\">#1</a> $branch to sandbox: <span class=\"label label-success\">PASSED</span><br />TAKAHASHI Kazunari: commit message here"
 
     WERCKER_IDOBATA_NOTIFY_TOKEN=token \
     WERCKER_DEPLOY_URL="http://example.com/deploy/1" \
@@ -57,8 +61,7 @@ setup() {
 }
 
 @test "Build failure" {
-    source="Build <span class=\"label label-important\">faild</span> \
-<a href=\"http://example.com/build/1\">#1</a> ${suffix}"
+    source="Build $repository<a href=\"http://example.com/build/1\">#1</a> $branch: <span class=\"label label-important\">FAILD</span><br />TAKAHASHI Kazunari: commit message here"
 
     WERCKER_IDOBATA_NOTIFY_TOKEN=token \
     WERCKER_BUILD_URL="http://example.com/build/1" \
@@ -72,8 +75,7 @@ setup() {
 }
 
 @test "Deploy failure" {
-    source="Deploy to sandbox <span class=\"label label-important\">faild</span> \
-<a href=\"http://example.com/deploy/1\">#1</a> ${suffix}"
+    source="Deploy $repository<a href=\"http://example.com/deploy/1\">#1</a> $branch to sandbox: <span class=\"label label-important\">FAILD</span><br />TAKAHASHI Kazunari: commit message here"
 
     WERCKER_IDOBATA_NOTIFY_TOKEN=token \
     WERCKER_DEPLOY_URL="http://example.com/deploy/1" \
