@@ -6,7 +6,8 @@ if [ $? = 1 ]; then
     exit 0
 fi
 
-http_code=`curl -s \
+http_code=`curl \
+    --silent \
     --data "format=html" \
     --data-urlencode "source=$(message)" \
     --output "$WERCKER_STEP_TEMP/result.txt" \
