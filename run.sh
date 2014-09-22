@@ -1,4 +1,4 @@
-source 'functions.sh'
+source "$WERCKER_STEP_ROOT/functions.sh"
 
 error_message=$(valid)
 if [ $? = 1 ]; then

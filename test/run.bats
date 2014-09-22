@@ -11,6 +11,7 @@ teardown() {
 
 @test "Token undefined" {
     WERCKER_IDOBATA_NOTIFY_TOKEN="" \
+    WERCKER_STEP_ROOT="." \
     run run.sh
 
     [ "$status" = "0" ]
@@ -24,6 +25,7 @@ teardown() {
     WERCKER_BUILD_URL="http://example.com/build/1" \
     WERCKER_BUILD_ID=1 \
     WERCKER_RESULT="passed" \
+    WERCKER_STEP_ROOT="." \
     CI=true \
     run run.sh
 
@@ -38,6 +40,7 @@ teardown() {
 
     WERCKER_IDOBATA_NOTIFY_TOKEN=token \
     WERCKER_RESULT="passed" \
+    WERCKER_STEP_ROOT="." \
     CI=true \
     run run.sh
 
