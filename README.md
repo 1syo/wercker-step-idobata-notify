@@ -13,7 +13,7 @@ The [idobata](https://idobata.io/) is nice group chat service for developer team
 ## Example
 
 ```
-deploy:
+build:
   after-steps:
     - 1syo/idobata-notify@0.1.2:
         token: YOUR_IDOBATA_TOKEN
