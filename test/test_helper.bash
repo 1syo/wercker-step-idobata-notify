@@ -11,6 +11,7 @@ if [ ! -n "$WERCKER" ]; then
     export WERCKER_APPLICATION_NAME="wercker-step-idobata-notify"
     export WERCKER_APPLICATION_OWNER_NAME="1syo"
     export WERCKER_APPLICATION_URL="https://app.wercker.com/#applications/5253e1053673929130009361"
+    export WERCKER_STEP_ROOT="."
     export WERCKER_STEP_TEMP=$BATS_TMPDIR
 fi
 

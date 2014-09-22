@@ -16,7 +16,7 @@ The [idobata](https://idobata.io/) is nice group chat service for developer team
 ```
 build:
   after-steps:
-    - 1syo/idobata-notify@0.2.0:
+    - 1syo/idobata-notify@0.2.1:
         token: YOUR_IDOBATA_TOKEN
 ```
 
@@ -24,7 +24,7 @@ build:
 ```
 deploy:
   after-steps:
-    - 1syo/idobata-notify@0.2.0:
+    - 1syo/idobata-notify@0.2.1:
         token: YOUR_IDOBATA_TOKEN
 ```
 
