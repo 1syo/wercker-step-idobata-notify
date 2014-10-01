@@ -17,7 +17,6 @@ fi
 
 success() {
     echo $1
-    exit 0
 }
 
 fail() {
@@ -25,13 +24,28 @@ fail() {
     exit 1
 }
 
+warn() {
+    echo $1
+}
+
 info() {
+    echo $1
+}
+
+debug() {
+    echo $1
+}
+
+setMessage() {
     echo $1
 }
 
 export -f success
 export -f fail
+export -f warn
 export -f info
+export -f debug
+export -f setMessage
 
 stub() {
     local cmd=$1
