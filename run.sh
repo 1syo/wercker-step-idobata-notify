@@ -2,7 +2,7 @@ source "$WERCKER_STEP_ROOT/functions.sh"
 
 error_message=$(valid)
 if [ $? = 1 ]; then
-    info "$error_message"
+    warn "$error_message"
     exit 0
 fi
 
@@ -17,6 +17,6 @@ http_code=`curl \
 if [ "$http_code" = "200" ]; then
     success "Finished successfully!"
 else
-    info `cat $WERCKER_STEP_TEMP/result.txt`
-    info "Finished unsuccessfully."
+    warn `cat $WERCKER_STEP_TEMP/result.txt`
+    warn "Finished unsuccessfully."
 fi
