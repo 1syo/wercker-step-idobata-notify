@@ -61,7 +61,7 @@ teardown() {
 }
 
 @test "Build failure" {
-    source="Build $repository<a href=\"http://example.com/build/1\">#1</a> $branch: <span class=\"label label-important\">FAILD</span><br />TAKAHASHI Kazunari: commit message here"
+    source="Build $repository<a href=\"http://example.com/build/1\">#1</a> $branch: <span class=\"label label-danger\">FAILD</span><br />TAKAHASHI Kazunari: commit message here"
 
     WERCKER_IDOBATA_NOTIFY_TOKEN=token \
     WERCKER_BUILD_URL="http://example.com/build/1" \
@@ -75,7 +75,7 @@ teardown() {
 }
 
 @test "Deploy failure" {
-    source="Deploy $repository<a href=\"http://example.com/deploy/1\">#1</a> $branch to sandbox: <span class=\"label label-important\">FAILD</span><br />TAKAHASHI Kazunari: commit message here"
+    source="Deploy $repository<a href=\"http://example.com/deploy/1\">#1</a> $branch to sandbox: <span class=\"label label-danger\">FAILD</span><br />TAKAHASHI Kazunari: commit message here"
 
     WERCKER_IDOBATA_NOTIFY_TOKEN=token \
     WERCKER_DEPLOY_URL="http://example.com/deploy/1" \
