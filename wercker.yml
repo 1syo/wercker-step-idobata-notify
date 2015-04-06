@@ -12,7 +12,7 @@ build:
         name: test
         code: bats test
   after-steps:
-    - 1syo/idobata-notify@0.2.2:
+    - 1syo/idobata-notify@0.2.3:
         token: $IDOBATA_TOKEN
 deploy:
   steps:
