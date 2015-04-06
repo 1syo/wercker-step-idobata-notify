@@ -27,7 +27,7 @@ build_result() {
     if [ "$WERCKER_RESULT" = "passed" ]; then
         echo "<span class=\"label label-success\">$result</span>"
     else
-        echo "<span class=\"label label-important\">$result</span>"
+        echo "<span class=\"label label-danger\">$result</span>"
     fi
 }
 
