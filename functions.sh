@@ -23,7 +23,7 @@ commit() {
 }
 
 build_result() {
-    result=$(tr '[a-z]' '[A-Z]' <<<"$WERCKER_RESULT")
+    result=$(echo $WERCKER_RESULT | tr '[a-z]' '[A-Z]')
     if [ "$WERCKER_RESULT" = "passed" ]; then
         echo "<span class=\"label label-success\">$result</span>"
     else
